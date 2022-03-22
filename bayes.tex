@@ -1,0 +1,552 @@
+\documentclass[11pt,twoside,spanish]{report} % Documento two sided
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{cite} % para que las citas en vez de [1,2,3] sea [1-3]
+\usepackage[binary-units]{siunitx}
+%\usepackage{cancel}
+\usepackage{amsfonts} % simbolos como el I de matriz identidad
+\usepackage{graphicx} % paquete para ver imagenes
+\graphicspath{ {imgMIT/} } % declaramos donde estan las imagenes
+\usepackage{caption} % para los graficos
+\usepackage{float}
+\usepackage[labelformat=simple]{subcaption} % para varias imagenes juntas
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\usepackage{mdframed}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=10mm]{geometry} % Parametros para two sided
+\usepackage{bm}
+\usepackage{wrapfig}
+\setlength{\headheight}{25.5pt} %me tiraba error sin esto, ni idea que es
+\usepackage{fancyhdr}
+\pagestyle{fancy} % agrega los headers y foots, en cada cap se puede cambiar, si es que no quiero tipo \pagestyle{plain} o empty
+\fancyhead{}
+\fancyhead[RO,LE]{T\'itulo Tesis} % en las paginas impares aparece a la derecha, y las pares izq
+\fancyfoot{}
+%\fancyfoot[LE,RO]{\thepage} % devuelve el n\'umero de la hoja
+%\fancyfoot[LO,CE]{Capitulo \thechapter}
+%\fancyfoot[CO,RE]{Matias Mazzanti}
+\fancyfoot[LO,CE]{Cap\'itulo \thechapter}
+\fancyfoot[RE,RO]{\thepage} % devuelve el n\'umero de la hoja
+\usepackage{csquotes} % lo pide para las citas
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage{microtype} % hace que las palabras entren mejor en el texto. por algun motivo algunas palabras qeudaban mas largas que el parrafo y no se arreglaba.
+\usepackage{mathtools}  % <----- for '\mathrlap' command (necessary)
+
+\newcommand{\mybar}[3]{%
+    \mathrlap{\hspace{#2}\overline{\scalebox{#1}[1]{\phantom{\ensuremath{#3}}}}}\ensuremath{#3}
+}
+%%%%%%%%%%% Intentando imitar a los checos
+\usepackage{titlesec}
+\usepackage[pdftex,dvipsnames,svgnames,nonamebreak,table]{xcolor}
+
+\usepackage{tikz} % si lo pongo antes de xcolor crashea
+\input{tikzlibrarybayesnet.code.tex}
+\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73} % ESTE!!!!
+\colorlet{sectboxcolor}{cyan!30}
+\colorlet{secnumcolor}{Black}
+\let\oldheadrule\headrule
+\newcommand\hfrac[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\renewcommand{\headrulewidth}{2pt} % cambia el tamano de la letra
+\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{ \color{frenchblue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{ \color{frenchblue}\leaders\hrule height \headrulewidth\hfill}}
+\newcommand{\vm}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathcal{N}}
+\usepackage{todonotes}
+%\usepackage{float}
+\setlength{\parskip}{0.3cm}
+
+
+% ver como cambiar color de indice
+
+\titleformat{\chapter}[display]
+ {\sffamily\huge\bfseries\filright}{\hspace{0.6em}\chaptertitlename\ \thechapter}{20pt}{\color{frenchblue}\raisebox{-6pt}[0pt]{\rule{0.5em}{10pc}\hspace{0.3em}}\Huge} %{format}{label}{sep}{before code}[after code]
+
+\titleformat{\section} {\normalfont\Large\bfseries\color{frenchblue}}{\textcolor{secnumcolor}{\raisebox{0pt}[0pt]{\color{frenchblue}\rule{0.5em}{1.5pc}\hspace{0.3em}}\thesection}}{0.5em}{\color{frenchblue}\huge}
+
+\titleformat{\subsection}{\normalfont\Large\bfseries\color{frenchblue}}{\textcolor{secnumcolor}{\raisebox{0pt}[0pt]{\color{frenchblue}\rule{0.5em}{1.5pc}\hspace{0.3em}}\thesubsection}}{0.5em}{\color{frenchblue}\Large}
+
+\usepackage{tocloft}
+%\renewcommand{\cftchapterleader}{\color{blue}\hrulefill}
+\usepackage[plainpages=false,colorlinks=true,
+linkcolor=frenchblue, % or some other suitable color
+citecolor=frenchblue,
+urlcolor=frenchblue,
+linktocpage]{hyperref}
+
+
+%  Para que no aparezca el titulo de tyablecontent y reemplazarlo por el chapter
+\addto\captionsspanish{\def\contentsname{\sffamily\bfseries\textcolor{frenchblue}{}}}
+
+\title{<++>}
+\author{Matias Mazzanti}
+\date{\today}
+
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\sisetup{output-decimal-marker = {,}}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Resumen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Resumen}
+\pagestyle{empty}
+\thispagestyle{empty}
+
+El objetivo de este resumen, es intentar aplicar la tecnica de estudio de Feyman, la cual implica explicar los temas de una forma hilada y explicadas con la mayor sencilles posible, sin recurir a palabras tecnicas.
+
+\textbf{Keywords}: Statistical, Machine Learning, Data Science
+
+
+
+\newpage
+\chapter*{\'Indice general} % asi cuenta esto como capitulo
+
+\vspace*{-4cm}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\thispagestyle{empty}
+\vspace*{-5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+
+\pagestyle{plain}
+\setcounter{page}{1}
+\chapter{The Fundamentals}
+Ejemplo de rodolfo pero un pensamiento frecuentista, para el bayesiano no hay
+una real diferencia entre proba y estadistica.
+Tengo un dispenser de caramelos rojos y negros.
+Si puedo ver lo que tiene dentro y se la proporcion entre rojos y negros, voy a poder
+sacar probabilidad de los resultados que van a venir.
+Por lo contrario, si el dispenser es como una caja negra donde no se que hay adentro
+ni sus proporciones, voy a poder \textbf{inferir} lo que hay mediante las observaciones
+que haga a medida que saco caramalos de a uno pagando con monedas (tipo los de shopings).
+
+Biblio: Jaynes y rethinking. El primero es conceptual sin tanto como aplicarlo.
+
+\section{Intro}
+La palabra probabilidad del latin se refiere a la forma de decidir la forma mas justa o correcta
+con la informacion que tenemos.
+La palabra luego se uso por el lado de las chances de algo o frecuencias (Kolmogorov).
+
+Por otro lado la estadistica viene del latin sobre las cosas de los estados.
+Viene de contestar preguntas sobre las mediciones que hacemos.
+Entonces dado que tenemos unas mediciones, que tienen cierto error, como infiero
+sobre el verdadero estado del fenomeno.
+La escuela clasica (frecuentista) por Fisher y Pearson usan todo lo que es el valor p, prueba de hipotesis,
+estimacion sin sesgo (unbiases), intervalo de confianza, etc.
+
+Para los frecuentistas la probabilidad es la frecuencia de ocurrencia.
+Es decir se requiere hacer muchas veces un experimento y se supone que la frecuencia
+de los eventos da la informacion.
+Para los Bayesianos, la probabilidad tiene que ver con el grado de creencia.
+Esto ultimo tiene sentido ya que en muchos casos no tiene sentido la frecuencia.
+En general cuando es un juego de azar, como el tirar los dados, tiene sentido
+el pensamiento frecuentista (y tambien el Bayesiano).
+Ej cuando falla: la probabilidad de que obama sea reelecto es 95\%. En frecuentismo que es?
+Hago 1000 elecciones y en 950 gana obama?
+
+Jaynes (Bayesiano), viene y dice que la probabilidad es una extension de la logica.
+Es razonar con informacion incompleta.
+Tambien dice que los axiomas de la probabilidad clasica (Kolmogorov) son derivables
+desde condiciones mas fundamentales de razonar consistentemente.
+Eso genera que la difrenencia entre probabilidad y estadistica desaparesca.
+La inferencia estadistica es razonar logicamente en una situacion que tenes una data
+que no describe completamente el fenomeno que nos interesa.
+Si uno quiere razonar consistemente sobre eso, uno va a usar el lenguaje de la probabilidad
+y las reglas que tiene.
+Ademas pone al teorema de Bayes como par de la logica de Aristoteles (P entonces Q).
+Con esto Jaynes critica y tira abajo casi todos los metodos clasicos de la escuela de Fisher,
+argumentando que es al reves la pregunta que se intenta resolver.
+
+Ejemplo: Tenemos una hipotesis de que no hay diferencia en los efectos de una droga entre
+el grupo de control y el grupo con la droga.
+La pregunta en estadistica clasica es condicional a esa hipotesis cual es la probabilidad
+(en realdiad frecuencia...) esperamos observar.
+Jaynes dice que la verdadera pregutna es al reves, dado que tenemos un set de datos,
+cuanta probabilidad asociamos a la hipotesis a que la droga si afecte.
+Es decir clasicamente se va de la hipotesis a los datos, y Jaynes va de los datos
+a la hipotesis.
+
+\section{Capitulo 1: plausible reasoning}
+Ejemplo, un policia ve en el medio de la noche, la ventana de una joyeria rota y un hombre
+con la cara tapada salir con una bolsa llena de joyas.
+Obviamente el policia no duda y sale a arrestarlo.
+
+Logicamente este razonamiento no se puede justificar.
+Desde la logica hay muchas situaciones que pueden explicar.
+El hombre es el dueño del local y vio que la ventana estaba rota y prefirio sacar
+todas las joyas.
+
+La probabilidad que suceda esto sabemos que es bajisima.
+Obviamente esto no es la forma de razonar humana....
+
+La logica hace algo como, si P es verdadero entonces Q es verdadero. Luego si
+observo que P es verdadero entonces concluyo que Q es verdadero.
+La logica Plausible va de otra forma.
+Si P es verdadero entonces Q es verdadero (igual hasta ahora), Luego si observo
+que Q es verdadero entonces P es mas plausible que antes.
+
+Esto tambien se relaja aun mas, y queda como Si P es verdadero entonces Q
+es plausible. Y el resto igual.
+En el ejemplo del policia.
+P es que una persoan sea un ladron entonces es plausible que robe una joyeria.
+Entonces si veo que estan robando una joyeria (Q verdadero), entonces
+es plausible que la persona P sea un ladron.
+
+Logica:
+AB producto logico o conjuncion. A y B son verdaders, en general son conmutativos.
+
+A+B es la suma logica o disjuncion. Al menos una de las preposiciones A o B es verdadera.
+Ademas, $\bar{A}\bar{B}\neq \overline{AB} = \bar{A} + \bar{B}$.
+Con solo el AND, OR y NOT se puede generar todo (conjuncion, disjuncion y negacion).
+La implicacion se define como $\bar{A}+B$.
+Pero tambien podemos evitar la disjuncion definiendola como:
+$A+B=\overline{(\bar{A}\bar{B})}$.
+Y si seguimos, podemos inventar una unica operacion NAND que sirva para crear todo.
+\begin{equation}
+  A\uparrow B = \overline{AB} = \bar{A}+\bar{B}
+\end{equation}
+\begin{align}
+  \begin{split}
+    \bar{A}&=A\uparrow A \\
+    AB &= (A\uparrow B)\uparrow (A\uparrow B) \\
+    A+B &= (A\uparrow A)\uparrow (B\uparrow B)
+  \end{split}
+\end{align}
+Tambien se puede generar NOR como $A\downarrow B = \overline{A+B}=\bar{A}\bar{B}$.
+
+Jaynes supone que queremos contruir un robot que pueda pensar con esta forma mas humana
+y enumera las cosas que deseamos que tenga en nuestra forma de  logica extendida.
+\begin{itemize}
+  \item Que la plausibilidad sea un numero real. Mientras mas grande
+    el valor mas plausible.
+    Y que A|B es que tan plausible es A dado B. Donde A|B es el condicional plausible.
+  \item Que concuerde con el sentido comun. Un sentido de direccion del razonamiento.
+    Ejemplo: Si (A|C) < (A|C$_{new}$) y
+    (B |AC) = (B|AC$_{new}$) entonces (AB|C) $\leq$ (AB|C$_{new}$) y ($\bar{A}|C)>\bar{A}|C_{new}$).
+  \item Razonar consistentemente.
+  \begin{enumerate}
+    \item Si podemos concluir en mas de una forma, tenemos que concluir en la misma
+      plausibilidad.
+    \item Siempre usamos toda la informacion disponible.
+    \item Estados equivalente de conocimiento deberian dar la misma plausibilidad.
+  \end{enumerate}
+\end{itemize}
+
+\section{Quantitative rules}
+\subsection{Regla del producto}
+Enter la probabilidad conjunta.
+Que es AB|C? Es decir A y B.
+
+Una forma de desarmarlo es pensando si B es verdadero (B|C) y luego, que dado B si
+A es verdadero (A|BC).
+Esto nos lleva a pensar que hay un funcional que nos de lo que queremos,
+AB|C=F[B|C, A|BC].
+Es pensar a la plausibilidad conjunta (joint plausability) en funcion de plausibilidades
+individuales.
+
+Tambien dice que no funcionaria pensarlo como un funcional de A y B por separado, como
+AB|C=F[A|C, B|C].
+Lo justifica diciendo que podemos pensar ejemplos donde esto falla.
+Como por ejemplo, A=proxima persona que conozca tiene pelo negro, B=proxima persona
+que conozca tiene ojos azules.
+Y queremos ver la probabilidad de que la siguiente persona que conozca tenga pelo
+negro y ojos azules.
+Podemos darnos cuentas que necesitamos saber la interaccion entre A y B, y no
+usarlas por separado, por A|C y B|C.
+Entonces tenemos esto por ahora:
+
+\begin{align}
+  \underbrace{AB|C}_{u}=F[\underbrace{B|C}_{x}, \underbrace{A|BC}_{y}]
+\end{align}
+
+Como dijimos, queremos que haya un direccionamiento del razonamiento.
+Entonce supongamos que actualizamos nuestra x con una que es mayor $x_{new}$.
+Sin modificar y.
+Como dijimos, esta plausibilidad que queremos calcular dado este nuevo x, tiene que subir.
+Un ejemplo burdo seria la probabilidad de que llueva mañana (B) y que haya habido vida en marte (A).
+Si luego de ver el pronostico del tiempo veo que hay mas probabilidad de lluvia, B|C va aumentar, (C no tendria sentido aca..)
+pero se que la probabilidad de que haya habido vida en marte no va a cambiar por saber que llueve mañana.
+Pero la probabilidad conjunta va a subir (o al menos quedar igual).
+
+Matematicamente, F tiene que ser continuea, y en este caso las derivadas parciales
+son positivas.
+La continuidad nos dice que si las derividas parciales cambian infinitesimalmente,
+la funcion F no puede cambiar mucho.
+
+Luego, piensa como seria si agregamos una preposicion mas.
+ABC|D.
+Esto lo podemos pensar como (AB)C o como A(BC) (que son iguales).
+Entonces:
+\begin{align}
+  \begin{split}
+    F[C|D,AB|CD] &= F[C|D,F[B|CD,A|BCD]] =\\
+    F[BC|D,A|BCD] &= F[F[C|D,B|CD],A|BCD]]
+  \end{split}
+\end{align}
+Esto es la relacion $F[F(x,y),z]=F[x,F(y,z)]$ (ecuacion de asociacion).
+Luego deduce matematicamente las posibles funciones que son solucion de este tipo de ecuacion.
+Y esto es:
+
+\begin{align}
+  F(x,y)=w^{-1}(w(x)w(y))
+\end{align}
+Con w alguna funcion monotona y continua.
+Donde $w^{-1}$ es la inversa.
+Un ejemplo sale facil con $w=e^x$ y $w^{-1}=lnx$.
+
+Esto empieza a tomar forma si aplicamos w a ambos lados de la ultima ecuacion.
+Nos queda w(F(x,y))=w(x)w(y).
+Y esto ya tiene forma, ya que si cambiamos la w por la famosa p de probabilidad ya nos queda
+la regla del producto.
+Para convencernos apliquemos al ejemplo del inicio.
+
+\begin{align}
+  \begin{split}
+    AB|C &= w^{-1}[w(B|C),w(A|BC)] =\\
+    BA|C &= w^{-1}[w(A|C),w(B|AC)] \rightarrow \\
+    w(AB|C) &= w(B|C)W(A|BC) = \\
+    w(BA|C) &=  w(A|C)W(B|AC)
+  \end{split}
+\end{align}
+
+Esta es la regla del producto.
+Esa w, la podemos pensar como el peso (weight), que nos transforma en una escala
+conveniente los resultados de plausibilidad (somo si le dieramos unidades a las respuestas..).
+Tambien podemos probar si si encontramos una w que funcione, luego w$^p$ para cualquier p tanto positivo
+como negativo, tambien funciona.
+
+De forma intuitva podemos ver el caso donde A es certero dado nuestro conocimiento de trasfondo C.
+\begin{itemize}
+  \item AB|C=B|C, ya que A es trivial no me esta aportando nada.
+  \item A|BC= A|C, A ya es certero con la info C, agregarle mas info no me cambia nada.
+\end{itemize}
+
+Con la primera, si aplicamos w
+\begin{align}
+  \begin{split}
+    w(AB|C) &= w(B|C)=w(B|C)w(A|BC) \rightarrow simplificamos \\
+    w(A|BC) &= 1 = w(A|C)
+  \end{split}
+\end{align}
+
+En el caso contrario donde A es imposible.
+El segundo caso es igual (A|BC= A|C) y si le aplico w:
+
+\begin{align}
+  w(A|C)&=w(B|C)w(A|C) \rightarrow \text{imposible para cualquier w(B|C)}\\
+  &\implies w(A|C)=0 \\
+  &\text{o es } +\infty
+\end{align}
+
+En el caso que nos de mas infinito podemos tomar como w, 1/w y nos da el cero.
+Cambiamos la escala.
+
+\subsection{Regla de la suma}
+Queremos ver ahora A o B.
+Pero pensemos primero en A y $\bar{A}$.
+Podemos a priori creer que w($\bar{A}$|C)=S(w(A|C)), para alguna funcion S.
+
+Sabemos que w($\overline{\overline{A}}$|C)=w(A|C).
+Entonces S(S(x))=x, es simetrico.
+Si pensamos en el caso que A es certero y $\bar{A}$ es imposible.
+Eso nos implica que S(0)=1 y que S(1)=0.
+
+Utilicemos la regla del producto y veamos que nos dice S.
+
+\begin{align}
+  \begin{split}
+    w(AB|C) &= w(A|C)w(B|AC) = w(A|C)S[w(\bar{B}|AC)]\\
+    w(A\bar{B}|C) &= w(A|C)w(\bar{B}|AC)
+  \end{split}
+\end{align}
+Si despuejo de la segunda ecuacion y reemplazo en la primera, llego a quen
+
+\begin{align}
+  \begin{split}
+    w(AB|C)&=w(A|C)S[\frac{w(A\bar{B}|C}{w(A|C)}] \\
+    w(BA|C)&=w(B|C)S[\frac{w(B\bar{A}|C}{w(B|C)}]
+  \end{split}
+\end{align}
+
+La segunda ecuacion es por ser conmutativos, w(AB|C) = w(BA|C), y reeptimos analogamente.
+Podemos tomar que B=$\overline{AD}$ para algun D, esto hace que $A\bar{B}=\bar{B}$ y
+$B\bar{A}=\bar{A}$.
+Y entonces si metemos esto en las ultimas ecuaciones,y tomamos por comodidad que
+x=w(A|C), y=w(B|C), llegamos a que
+
+\begin{align}
+  xS[\frac{S(y)}{x}]=yS[\frac{S(x)}{y}]
+\end{align}
+
+Entonces para todo x, y, podemos saber que tipo de funcion tiene que ser S.
+\begin{align}
+  S(x)=(1-x^m)^{1/m}
+\end{align}
+Para algun m.
+Entonces $w(\bar{A}|C)=S(w(A|C))=(1-w(A|C)|^m)^{1/m}$.
+Trabajando con los dos extremos, puedo despejar la raiz y pasar sumando
+el termino.
+
+\begin{align}
+  w(\bar{A}|C)^m + w(A|C)^m = 1
+\end{align}
+
+
+Con esto, podemos definir una escala P(x)=w(x)$^m$.
+Y llegamos a la famosa probabilidada:
+
+\begin{align}
+  \begin{split}
+    P(\bar{A}|C) &= 1-P(A|C) \rightarrow \text{sum rule}\\
+    P(AB|C) &= P(B|C)P(A|BC) \rightarrow \text{product rule}
+  \end{split}
+\end{align}
+
+si miramos la implifacion logica, C: A$\implies B$, y A es verdadero, basciamente tenemos que
+P(AB|C)=P(A|C)=P(A|C)P(B|AC), y entonces P(B|AC)=1, como esperamos.
+\subsection{Bayes}
+Si miramos ahora el silogismo debil C: A$\implies B$, B es verdadero.
+
+llegamos a que
+\begin{align}
+  P(A|BC)=\frac{P(AB|C)}{P(B|C)}= P(A|C)\frac{P(B|AC)}{P(B|C)}
+\end{align}
+
+Entonces si volvemos a nuestro ejemplo del policia, donde A es que sea un ladron y B
+es la observacion  de que esa persona esta saliendo de una joyeria con una mascara, etc.
+Nos dice como actualziar.
+Como la probabilidad de que alguien sea un ladron por la probabilidad de que ese comportamiento
+de alguien saliendo de una joyeria blabla sea si es ladron, dividido la probabilidad de
+que pase ese evento.
+Entonces queda bien mirar que si P(B|AC)=1, entonces si P(B|C) es muy chico, como un evento
+como el de la joyeria, nuestra info previa P(A|C) se va actualziar para arriba (dividir
+por un numero chico).
+O mas real, la probabilidad de que el evento de la joyeria sea verdad dado que esa persona es
+un ladron (A) es muy alta, 0.9, y que la probabilidad de que pase ese evento por si solo
+es muy bajo, hace que aumente mucho nuestra creencia en que esa persona es un ladron.
+
+Como ya sabemos, tenemos nuestro prior por la distribucion de sampleo (likelihood), que tan probable
+es nuestra data dado una hipotesis, dividido la probabilidad de la data en cualquier hipotesis (
+los frecuentistas no lo usan).
+Esa division se le llama la proporcion de la verisimilitud.
+
+\section{Elementary sampling theory}
+Caso de la urna.
+Tengo N bolas en una urna y M de estas son de color rojos y el restante (N-M) son blancas.
+La preposicion C nos dice esto y ademas que no sabemos nada de la posicion de las bolas.
+
+Entonces C nos dice que es indiferente sobre que bola voy a sacar si saco una.
+Si $A_i$ es que saco la bola $i$, lo que tengo es que $P(A_1+A_2+...+A_N|C)=1$, ya que
+son las N posibilidades, una de esas si o si voy a sacar entonces la probabilidad es 1.
+Ademas son exclusivas mutuamente, es decir, no puedo sacar una bola que sea la i y la j a la vez.
+Esto es que $P(A_iA_j|C)=0$.
+Esto ultimo me genera entonces que la probabilidad conjunta de todas estas es la
+sumatoria de todas ellas (sin terminos de interseccion si se quiere pensar).
+Es decir $P(A_1+A_2+...+A_N|C)=\sum_{i=1}^NP(A_i|C)$.
+
+Si junto estas dos concluciones llego a que $P(A_1+A_2+...+A_N|C)=\sum_{i=1}^NP(A_i|C)=NP(A_i|C)=1$
+y eso implica que $P(A_i|C)=\frac{1}{N}$.
+Teniendo esto, es trivial llegar a que entonces si pregunto cual es la probabilidad de que saque
+una bola roja, $P(\text{draw a red ball}|C)=\frac{M}{N}$.
+
+Aca viene la pregunta, estas probabilidades son subjetivas o objetivas.
+Esta última probabilidad esta midiendo algo en la vida real o si es algo
+ que refleja nuestro conocimiento.
+ Segun Jaynes es el segundo caso, no es algo que nosotros podemos medir haciendo experimentos
+ como sacar bolas y contar la frecuencia de bolas rojas ya que esa probabilidad esta
+ sujeta a una cierta informacion previa o antecedentes  C (background)  sobre que creemos previamente del problema.
+ Si esto fuera asi seria como verificar el amor que tiene un niño hacia su perro a traves de
+ hacer experimentos con el perro.
+ Le esta faltanto el como nos relacionamos con el sistema (perro) y que suposiciones nosotros
+ traemos a la ''mesa''.
+
+ Un ejemplo extremo seria, tener la suposicion que teniamos hasta ahora de la urna, tener
+ nuestra probabilidad, pero en realidad la urna estaba vacia y a la hora de hacer el expermiento
+ no podemos sacar ninguna.
+ Entonces solucionamos esto diciendo que C no esta reflejando la realidad del problema.
+
+ Jaynes dice que no es ni la escuala frecuentista donde la probabilidad M/N sale de
+ la frecuencia de cuantas veces salen las bolas rojas, ni tampoco la escuela subjetiva
+ que dice que es nuestra creencia y nosotros podemos creer lo que queramos.
+ El punto medio, es que las probabilidades si son grados de creencia y son subjetivos, pero estan forzados
+ por suposiciones que podemos especificar y agregar y podemos comparar con las suposiciones de otros.
+
+ A pesar de que esta probabilidad se le asume a Bernoulli, el quizo resolver el problema inverso.
+ Dada una data que suposiciones puedo decir (es decir inferir en N y M).
+
+ \subsection{Sampleo sin reemplazo}
+ Esta vez la suposicion C es como la de antes pero le agregamos que no aprendemos nada
+ luego de las otras bolas luego de sacar una.
+ Sacamos bolas n veces.
+ Si anotamos como $R_i$ el sacar una bola roja en la sacada i-esima, y
+ $W_i$ para una bola blanca.
+Como podemos entender, $P(R_1|C)=\frac{M}{N}$ y $P(W_1|C)=\frac{N-M}{N}$.
+
+Si queremos la probabilidad de sacar dos rojas seguidas, $P(R_1R_2|C)=P(R_1|C)P(R_2|R_1C)=\frac{M}{N}\frac{M-1}{N-1}$.
+Y esto es facilmente extendible.
+
+\begin{align}
+  P(R_1R_2...R_r|C)=\frac{M}{N}\frac{M-1}{N-1}...\frac{M-r+1}{N-r+1}=\frac{M!(N-r)!}{N!(M-r)!}
+\end{align}
+
+y si queremos esto mismo pero para las blancas, tenemos que pensar que en vez de usar M usamos N-M y
+llegamos a :
+
+\begin{align}
+  P(W_1w_2...W_w|C)=\frac{N-M}{N}\frac{N_M-1}{N-1}...\frac{N-M-w+1}{N-w+1}=\frac{(N-M)!(N-w)!}{N!(N-M-w)!}\label{eq:probBlancas}
+\end{align}
+
+Podemos preguntarnos cual es la probabilidad de sacar r rojas seguidas y luego w blancas seguidas.
+Esto sale de usar la \ref{eq:probBlancas} pero en vez de tener N bolas tenemos N-r (ya que sacamos ya r rojas), y en vez
+de M tener M-r.
+
+\begin{align}
+  P(W_{r+1}...P_{r+w}|R_1R_2...R_rC)=\frac{(N-M)!(N-r+w)!}{(N-M-w)!(N-r)!}
+\end{align}
+
+Con esto podemos sacar la probabilidad de que saquemos de forma conjunta r rojas y w blancas, y
+al escribirlo podemos deducir que ademas se cumple esa probabilidad sin importar el orden.
+En este caso elegimos que sean las primeras sacadas r rojas y luego las w siguientes que sean blancas,
+pero esa probabilidad se mantiene sin importar cual es el orden que sacamos.
+\begin{align}
+  P(R_1R_2...R_rW_{r+1}...P_{r+w}|C)=\frac{M!(N-M)!(N-r+w)!}{(M-r)!(N-M-w)!N!}\label{eq:probConj}
+\end{align}
+
+Si ahora buscamos la probabilidad de sacar r rojas en n sacadas (donde n = r+w), podremos notar
+como la probabilidad es igual para cada caso, tenemos que multuplicar \ref{eq:probConj} por la cantidad de
+formas que tenemos de sacar r rojas en n sacadas.
+Y eso es el combinatorio de n con r.
+
+\begin{align}
+  \binom{n}{r} = \frac{n!}{r!(n-r)!}
+\end{align}
+
+Al hacer esto podemos reescribir lo que se llega en terminos de solo 3 combinatorios.
+Si escribimos a $A_r$ como el sacar r rojas sin importar el orden, llegamos a que:
+
+\begin{align}
+  P(A|C)=  \frac{\binom{M}{r} \binom{N-M}{n-r}}{\binom{N}{n}}
+\end{align}
+
+si suponemos M, N y n fijos, esto queda una distribucion de r, la que se llama distribucion \textbf{Hipergeometrica}.
+\subsection{Logic vs}
+Aca Jaynes hace un analisis del caso $P(R_1|R_2C)$.
+Esto es como ir para atras en el tiempo, que probabilidad tengo de algo que ya sucedio, dado que luego de eso
+sucedio otra cosa.
+Como dice esa probabilidad, que  probabilidad hay que haya sacado en la primer sacada una bola roja
+si en la segunda se que saque una roja.
+Haciendo las cuentas por simetria (ya que ambas individualmente tienen la misma proba), se llega a que
+esa probabilidad es igual a $P(R_2|R_1C)$.
+Y este caso podria pensarse como el caso de un arqueologo, encontrar algo en el presente hace
+que se revalue la probabilidad de algo que ya paso.
+\end{document}
+
